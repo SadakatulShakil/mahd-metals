@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+venv/
+.venv/
+*.egg-info/
+
+# Node
+node_modules/
+dist/
+.env
+.env.local
+
+# Mac
+.DS_Store
+
+# VSCode
+.vscode/
+
+# PostgreSQL
+*.sql.bak
