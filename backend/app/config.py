@@ -1,5 +1,4 @@
 from pydantic_settings import BaseSettings
-from typing import Optional
 
 class Settings(BaseSettings):
     DATABASE_URL: str
@@ -13,6 +12,16 @@ class Settings(BaseSettings):
     NOTIFY_EMAIL: str = "info@mahdmetals.com"
 
     FRONTEND_URL: str = "http://localhost:5173"
+
+    # JWT
+    JWT_SECRET_KEY: str = "change-me"
+    JWT_ALGORITHM: str = "HS256"
+    JWT_EXPIRE_MINUTES: int = 1440
+
+    # Cloudinary
+    CLOUDINARY_CLOUD_NAME: str = ""
+    CLOUDINARY_API_KEY: str = ""
+    CLOUDINARY_API_SECRET: str = ""
 
     class Config:
         env_file = ".env"

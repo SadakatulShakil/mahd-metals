@@ -1,51 +1,15 @@
 import axios from 'axios'
 
-// ─────────────────────────────────────────────
-// API Base URL
-// LOCAL DEV (active):
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+const BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+export const api = axios.create({ baseURL: BASE })
 
-// PRODUCTION on Render/VPS (comment out until deployed):
-// const BASE_URL = 'https://api.mahdmetals.com'
-
-// VERCEL + Render combo (comment out until deployed):
-// const BASE_URL = import.meta.env.VITE_API_URL
-// ─────────────────────────────────────────────
-
-export const api = axios.create({
-  baseURL: BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
-})
-
-export interface ContactForm {
-  name: string
-  email: string
-  subject: string
-  message: string
-}
-
-export interface Material {
-  id: number
-  slug: string
-  name: string
-  category: string
-  description: string
-  seo_title: string
-  seo_description: string
-  image_url: string
-}
-
-export const submitContact = async (data: ContactForm) => {
-  const res = await api.post('/api/contact/', data)
-  return res.data
-}
-
-export const getMaterials = async (): Promise<Material[]> => {
-  const res = await api.get('/api/materials/')
-  return res.data
-}
-
-export const getStats = async () => {
-  const res = await api.get('/api/stats')
-  return res.data
-}
+export const fetchHero         = () => api.get('/api/admin/hero')
+export const fetchAbout        = () => api.get('/api/admin/about')
+export const fetchStats        = () => api.get('/api/admin/stats')
+export const fetchMaterials    = () => api.get('/api/materials/')
+export const fetchTestimonials = () => api.get('/api/admin/testimonials')
+export const fetchContactInfo  = () => api.get('/api/admin/contact-info')
+export const fetchSettings     = () => api.get('/api/admin/settings')
+export const fetchBranding     = () => api.get('/api/admin/branding')
+export const fetchBanner       = (page: string) => api.get(`/api/admin/banners/${page}`)
+export const submitContact     = (data: any) => api.post('/api/contact/', data)
