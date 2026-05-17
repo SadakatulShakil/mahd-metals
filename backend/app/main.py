@@ -9,16 +9,14 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="MAHD Metals API",
-    description="Backend API for MAHD Metals International",
     version="2.0.0"
 )
 
 origins = [
-    settings.FRONTEND_URL,
     "http://localhost:5173",
-    # "https://mahdmetals.com",
-    # "https://www.mahdmetals.com",
-    # "https://mahd-metals.vercel.app",
+    "https://saddamscarpandmetal.com",
+    "https://www.saddamscarpandmetal.com",
+    "https://mahd-metals.vercel.app",
 ]
 
 app.add_middleware(
