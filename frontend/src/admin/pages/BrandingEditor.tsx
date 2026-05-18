@@ -61,8 +61,8 @@ export default function BrandingEditor() {
                 className="h-10 w-auto object-contain" />
             )}
             <div className="text-2xl font-black">
-              <span className="text-amber-400">{form.logo_text_primary || 'MAHD'}</span>
-              <span className="text-white">{form.logo_text_secondary || ' Metals'}</span>
+              <span className="text-amber-400">{form.logo_text_primary || 'SADDAM'}</span>
+              <span className="text-white">{form.logo_text_secondary || ' Scrap and Metal'}</span>
             </div>
           </div>
 

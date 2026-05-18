@@ -8,7 +8,7 @@ class HeroContent(Base):
     badge_text = Column(String(200), default="Trusted in 30+ Countries Worldwide")
     headline_line1 = Column(String(200), default="Your Global Partner in")
     headline_line2 = Column(String(200), default="Scrap & Alloy Metals")
-    subheadline = Column(Text, default="MAHD Metals connects the global supply chain with premium ferrous, non-ferrous, and specialty alloy metals.")
+    subheadline = Column(Text, default="Saddam Scrap and Metal connects the global supply chain with premium ferrous, non-ferrous, and specialty alloy metals.")
     cta_primary_text = Column(String(100), default="Request a Quote")
     cta_secondary_text = Column(String(100), default="Explore Materials")
     bg_image_url = Column(String(500), nullable=True)
@@ -19,7 +19,7 @@ class AboutContent(Base):
     id = Column(Integer, primary_key=True)
     section_label = Column(String(100), default="About Us")
     headline = Column(String(300), default="Built on 40 Years of Gulf Expertise")
-    body_paragraph1 = Column(Text, default="MAHD Metals International is founded by Mohammad Hamad Al Bahar (Kuwait) and Bandar Mohammad Al Ghamdi (Saudi Arabia).")
+    body_paragraph1 = Column(Text, default="Saddam Scrap and Metal is founded by Mohammad Hamad Al Bahar (Kuwait) and Bandar Mohammad Al Ghamdi (Saudi Arabia).")
     body_paragraph2 = Column(Text, default="From major construction and industrial projects to banking and international trade, our founders bring unmatched credibility to every deal.")
     photo_url = Column(String(500), nullable=True)
     founded_year = Column(String(20), default="Est. 1984")
@@ -70,11 +70,11 @@ class ContactInfo(Base):
 class SiteSettings(Base):
     __tablename__ = "site_settings"
     id = Column(Integer, primary_key=True)
-    company_name = Column(String(100), default="MAHD Metals International")
+    company_name = Column(String(100), default="Saddam Scrap and Metal")
     tagline = Column(String(300), default="Your global partner in scrap and alloy metal trading.")
-    footer_text = Column(String(500), default="© 2026 MAHD Metals International. All rights reserved.")
-    meta_title = Column(String(200), default="MAHD Metals International | Global Scrap & Alloy Metal Trading")
-    meta_description = Column(Text, default="MAHD Metals connects the global supply chain with premium ferrous, non-ferrous, and specialty alloy metals.")
+    footer_text = Column(String(500), default="© 2026 Saddam Scrap and Metal. All rights reserved.")
+    meta_title = Column(String(200), default="Saddam Scrap and Metal | Global Scrap & Alloy Metal Trading")
+    meta_description = Column(Text, default="Saddam Scrap and Metal connects the global supply chain with premium ferrous, non-ferrous, and specialty alloy metals.")
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
 class PageBanner(Base):
@@ -90,10 +90,10 @@ class PageBanner(Base):
 class BrandingContent(Base):
     __tablename__ = "branding_content"
     id = Column(Integer, primary_key=True)
-    logo_text_primary = Column(String(50), default="MAHD")
-    logo_text_secondary = Column(String(50), default=" Metals")
+    logo_text_primary = Column(String(50), default="SADDAM")
+    logo_text_secondary = Column(String(50), default=" Scrap and Metal")
     company_tagline = Column(String(300), default="Your global partner in scrap and alloy metal trading.")
-    footer_copyright = Column(String(300), default="© 2026 MAHD Metals International. All rights reserved.")
+    footer_copyright = Column(String(300), default="© 2026 Saddam Scrap and Metal. All rights reserved.")
     developer_name = Column(String(100), nullable=True)
     footer_locations = Column(String(200), default="Jeddah · Kuwait · Global")
     favicon_url = Column(String(500), nullable=True)

@@ -27,7 +27,7 @@ export default function AdminNav() {
     <aside className="w-60 min-h-screen bg-[#080d1a] border-r border-white/5 flex flex-col">
       <div className="p-6 border-b border-white/5">
         <div className="text-lg font-black">
-          <span className="text-amber-400">MAHD</span>
+          <span className="text-amber-400">SADDAM</span>
           <span className="text-white"> Admin</span>
         </div>
         <div className="text-xs text-gray-500 mt-0.5">Content Management</div>

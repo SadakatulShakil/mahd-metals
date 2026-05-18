@@ -20,7 +20,7 @@ if not existing:
     admin = AdminUser(
         email="admin@mahdmetals.com",
         hashed_password=hash_password("admin123"),
-        full_name="MAHD Admin"
+        full_name="SADDAM Admin"
     )
     db.add(admin)
     db.commit()
@@ -49,7 +49,7 @@ print("   Password: admin123")
 # Seed page banners
 from app.models.site_content import PageBanner, BrandingContent
 for page, title, subtitle in [
-    ("about",     "About MAHD Metals",    "A partnership built on 40 years of Gulf expertise and global trust."),
+    ("about",     "About Saddam Scrap and Metal",    "A partnership built on 40 years of Gulf expertise and global trust."),
     ("materials", "Our Materials",        "Premium ferrous, non-ferrous, and specialty alloy metals — sourced and traded globally."),
     ("contact",   "Contact Us",           "Request a quote or get in touch with our global trading team."),
 ]:
