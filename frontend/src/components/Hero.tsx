@@ -24,8 +24,8 @@ export default function Hero() {
       {bgImage && (
         <div className="absolute inset-0 z-0">
           <img src={bgImage} alt="Hero background"
-            className="w-full h-full object-cover opacity-20" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/60 via-[#020617]/40 to-[#020617]" />
+            className="w-full h-full object-cover opacity-50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/30 via-[#020617]/20 to-[#020617]" />
         </div>
       )}
 

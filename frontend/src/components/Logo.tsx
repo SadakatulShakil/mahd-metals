@@ -19,7 +19,7 @@ export default function Logo({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
   const sizeClass  = size === 'lg' ? 'text-3xl' : size === 'sm' ? 'text-lg' : 'text-xl'
   const imgHeight  = size === 'lg' ? 'h-10' : size === 'sm' ? 'h-6' : 'h-8'
   const primary    = branding?.logo_text_primary   || 'SADDAM'
-  const secondary  = branding?.logo_text_secondary || ' Scrap and Metal'
+  const secondary  = branding?.logo_text_secondary || ' SCRAP AND METAL'
 
   return (
     <Link to="/" className="flex items-center gap-2.5">
