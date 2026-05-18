@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { adminApi } from '../lib/adminApi'
 import toast from 'react-hot-toast'
-import { Plus, Trash2, Save, GripVertical, EyeOff, Eye } from 'lucide-react'
+import { Plus, Trash2, GripVertical, EyeOff, Eye } from 'lucide-react'
 
 interface Bullet {
   id?: number
