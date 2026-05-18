@@ -17,7 +17,8 @@ async function cachedGet(path: string) {
     try {
       const raw = localStorage.getItem(key)
       if (!raw) return null
-      return JSON.parse(raw).data
+      const { data, ts } = JSON.parse(raw)
+      return Date.now() - ts < TTL ? data : null
     } catch { return null }
   })()
 
