@@ -1,25 +1,30 @@
 import { useEffect, useState } from 'react'
 import { adminApi } from '../lib/adminApi'
 import toast from 'react-hot-toast'
-import { Plus, Trash2, GripVertical, EyeOff, Eye } from 'lucide-react'
+import { Plus, Trash2, Save, GripVertical, EyeOff, Eye } from 'lucide-react'
 
 interface Bullet {
-  id?: number
+  id: number
   text: string
   order: number
   is_active: boolean
 }
 
 export default function AboutBulletsEditor() {
-  const [bullets, setBullets] = useState<Bullet[]>([])
-  const [loading, setLoading] = useState(true)
-  const [newText, setNewText] = useState('')
-  const [adding, setAdding]   = useState(false)
+  const [bullets, setBullets]   = useState<Bullet[]>([])
+  const [loading, setLoading]   = useState(true)
+  const [newText, setNewText]   = useState('')
+  const [adding, setAdding]     = useState(false)
+  const [saving, setSaving]     = useState<Record<number, boolean>>({})
 
   const load = () =>
     adminApi.get('/api/admin/about-bullets/all')
       .then(r => { setBullets(r.data); setLoading(false) })
-      .catch(() => setLoading(false))
+      .catch(err => {
+        console.error('Load error:', err)
+        toast.error('Failed to load bullets')
+        setLoading(false)
+      })
 
   useEffect(() => { load() }, [])
 
@@ -35,15 +40,29 @@ export default function AboutBulletsEditor() {
       setNewText('')
       toast.success('Bullet added!')
       load()
-    } catch { toast.error('Failed to add') }
-    finally { setAdding(false) }
+    } catch (err: any) {
+      console.error('Add error:', err)
+      toast.error(err?.response?.data?.detail || 'Failed to add bullet')
+    } finally {
+      setAdding(false)
+    }
   }
 
-  const update = async (b: Bullet) => {
+  const save = async (b: Bullet) => {
+    setSaving(prev => ({ ...prev, [b.id]: true }))
     try {
-      await adminApi.put(`/api/admin/about-bullets/${b.id}`, b)
+      await adminApi.put(`/api/admin/about-bullets/${b.id}`, {
+        text: b.text,
+        order: b.order,
+        is_active: b.is_active,
+      })
       toast.success('Saved!')
-    } catch { toast.error('Save failed') }
+    } catch (err: any) {
+      console.error('Save error:', err)
+      toast.error(err?.response?.data?.detail || 'Save failed')
+    } finally {
+      setSaving(prev => ({ ...prev, [b.id]: false }))
+    }
   }
 
   const remove = async (id: number) => {
@@ -51,13 +70,25 @@ export default function AboutBulletsEditor() {
       await adminApi.delete(`/api/admin/about-bullets/${id}`)
       setBullets(prev => prev.filter(b => b.id !== id))
       toast.success('Deleted')
-    } catch { toast.error('Delete failed') }
+    } catch (err: any) {
+      console.error('Delete error:', err)
+      toast.error(err?.response?.data?.detail || 'Delete failed')
+    }
   }
 
   const toggle = async (b: Bullet) => {
     const updated = { ...b, is_active: !b.is_active }
     setBullets(prev => prev.map(x => x.id === b.id ? updated : x))
-    await update(updated)
+    try {
+      await adminApi.put(`/api/admin/about-bullets/${b.id}`, {
+        text: updated.text,
+        order: updated.order,
+        is_active: updated.is_active,
+      })
+    } catch (err: any) {
+      setBullets(prev => prev.map(x => x.id === b.id ? b : x))
+      toast.error(err?.response?.data?.detail || 'Toggle failed')
+    }
   }
 
   const setText = (id: number, text: string) =>
@@ -73,6 +104,11 @@ export default function AboutBulletsEditor() {
       </div>
 
       <div className="space-y-3 mb-6">
+        {bullets.length === 0 && (
+          <div className="text-center py-8 text-gray-500 text-sm border border-white/5 rounded-xl bg-[#0d1424]">
+            No bullet points yet. Add one below.
+          </div>
+        )}
         {bullets.map((b, i) => (
           <div key={b.id}
             className={`flex items-center gap-3 bg-[#0d1424] border rounded-xl px-4 py-3 transition-all ${
@@ -82,16 +118,22 @@ export default function AboutBulletsEditor() {
             <span className="text-gray-500 text-xs w-5 shrink-0">{i + 1}.</span>
             <input
               value={b.text}
-              onChange={e => setText(b.id!, e.target.value)}
-              onBlur={() => update(b)}
-              className="flex-1 bg-transparent text-white text-sm outline-none placeholder-gray-600"
+              onChange={e => setText(b.id, e.target.value)}
+              className="flex-1 bg-transparent text-white text-sm outline-none"
             />
+            <button
+              onClick={() => save(b)}
+              disabled={saving[b.id]}
+              className="text-gray-500 hover:text-amber-400 disabled:opacity-40 transition-colors p-1 shrink-0"
+              title="Save">
+              <Save size={14} />
+            </button>
             <button onClick={() => toggle(b)}
               className="text-gray-500 hover:text-amber-400 transition-colors p-1 shrink-0"
               title={b.is_active ? 'Hide' : 'Show'}>
               {b.is_active ? <Eye size={14} /> : <EyeOff size={14} />}
             </button>
-            <button onClick={() => remove(b.id!)}
+            <button onClick={() => remove(b.id)}
               className="text-gray-500 hover:text-red-400 transition-colors p-1 shrink-0">
               <Trash2 size={14} />
             </button>
