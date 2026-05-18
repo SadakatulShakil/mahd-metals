@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Phone, Mail, MapPin, Code2 } from 'lucide-react'
+import { Phone, Mail, MapPin, Code2, Facebook, Instagram, Linkedin } from 'lucide-react'
 import { fetchContactInfo, fetchBranding } from '../lib/api'
 import Logo from './Logo'
 
@@ -18,7 +18,10 @@ export default function Footer() {
   const tagline   = branding?.company_tagline  || 'Your global partner in scrap and alloy metal trading.'
   const copyright = branding?.footer_copyright || '© 2026 Saddam Scrap and Metal. All rights reserved.'
   const locations = branding?.footer_locations || 'Jeddah · Kuwait · Global'
-  const developer = branding?.developer_name   || null
+  const developer   = branding?.developer_name   || null
+  const facebook    = branding?.facebook_url     || null
+  const instagram   = branding?.instagram_url    || null
+  const linkedin    = branding?.linkedin_url     || null
 
   return (
     <footer className="bg-[#020617] border-t border-white/[0.06]">
@@ -68,6 +71,28 @@ export default function Footer() {
         <div className="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row items-center justify-between gap-3">
           <div className="text-gray-600 text-xs">{copyright}</div>
           <div className="text-gray-600 text-xs">{locations}</div>
+          {(facebook || instagram || linkedin) && (
+            <div className="flex items-center gap-3">
+              {facebook && (
+                <a href={facebook} target="_blank" rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-amber-400 transition-colors">
+                  <Facebook size={15} />
+                </a>
+              )}
+              {instagram && (
+                <a href={instagram} target="_blank" rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-amber-400 transition-colors">
+                  <Instagram size={15} />
+                </a>
+              )}
+              {linkedin && (
+                <a href={linkedin} target="_blank" rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-amber-400 transition-colors">
+                  <Linkedin size={15} />
+                </a>
+              )}
+            </div>
+          )}
           {developer && (
             <div className="flex items-center gap-1.5 text-gray-600 text-xs">
               <Code2 size={11} className="text-amber-500/60" />

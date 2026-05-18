@@ -109,6 +109,23 @@ export default function BrandingEditor() {
           ))}
         </div>
 
+        {/* Social Media Links */}
+        <div className="bg-[#0d1424] border border-white/5 rounded-2xl p-6 space-y-4">
+          <h2 className="text-sm font-bold text-white">Social Media Links</h2>
+          <p className="text-xs text-gray-500">Leave blank to hide icons in the footer</p>
+          {[
+            ['Facebook URL', 'facebook_url', 'https://facebook.com/yourpage'],
+            ['Instagram URL', 'instagram_url', 'https://instagram.com/yourpage'],
+            ['LinkedIn URL', 'linkedin_url', 'https://linkedin.com/company/yourcompany'],
+          ].map(([label, name, placeholder]) => (
+            <div key={name}>
+              <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">{label}</label>
+              <input value={form[name] || ''} onChange={set(name)} placeholder={placeholder}
+                className="w-full bg-[#1a2235] border border-white/10 focus:border-amber-500 rounded-xl px-4 py-3 text-white outline-none text-sm" />
+            </div>
+          ))}
+        </div>
+
         {/* Developer credit */}
         <div className="bg-[#0d1424] border border-white/5 rounded-2xl p-6">
           <h2 className="text-sm font-bold text-white mb-1">Developer Credit</h2>

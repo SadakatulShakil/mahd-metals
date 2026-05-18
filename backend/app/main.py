@@ -7,6 +7,19 @@ from .config import settings
 
 Base.metadata.create_all(bind=engine)
 
+# Additive column migrations (safe to run on every startup)
+with engine.connect() as conn:
+    for col in [
+        "ALTER TABLE branding_content ADD COLUMN IF NOT EXISTS facebook_url VARCHAR(500)",
+        "ALTER TABLE branding_content ADD COLUMN IF NOT EXISTS instagram_url VARCHAR(500)",
+        "ALTER TABLE branding_content ADD COLUMN IF NOT EXISTS linkedin_url VARCHAR(500)",
+    ]:
+        try:
+            conn.execute(__import__('sqlalchemy').text(col))
+            conn.commit()
+        except Exception:
+            pass
+
 app = FastAPI(
     title="MAHD Metals API",
     version="2.0.0"

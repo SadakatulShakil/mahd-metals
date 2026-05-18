@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
+import ScrollToTop from './components/ScrollToTop'
+import Chatbot from './components/Chatbot'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
@@ -29,6 +31,7 @@ export default function App() {
         style: { background: '#0d1424', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }
       }} />
       <Routes>
+        <ScrollToTop />
         {/* Public */}
         <Route path="/"          element={<><Navbar /><Home /><Footer /></>} />
         <Route path="/about"     element={<><Navbar /><AboutPage /><Footer /></>} />
@@ -52,6 +55,7 @@ export default function App() {
           <Route path="settings"    element={<SettingsEditor />} />
         </Route>
       </Routes>
+      <Chatbot />
     </>
   )
 }

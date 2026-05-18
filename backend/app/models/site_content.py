@@ -105,4 +105,7 @@ class BrandingContent(Base):
     footer_locations = Column(String(200), default="Jeddah · Kuwait · Global")
     favicon_url = Column(String(500), nullable=True)
     logo_image_url = Column(String(500), nullable=True)
+    facebook_url = Column(String(500), nullable=True)
+    instagram_url = Column(String(500), nullable=True)
+    linkedin_url = Column(String(500), nullable=True)
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())

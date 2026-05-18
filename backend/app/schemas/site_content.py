@@ -107,6 +107,9 @@ class BrandingSchema(BaseModel):
     footer_locations: Optional[str] = None
     favicon_url: Optional[str] = None
     logo_image_url: Optional[str] = None
+    facebook_url: Optional[str] = None
+    instagram_url: Optional[str] = None
+    linkedin_url: Optional[str] = None
 
     class Config:
         from_attributes = True
