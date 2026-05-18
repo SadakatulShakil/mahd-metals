@@ -30,8 +30,8 @@ export default function App() {
       <Toaster position="top-right" toastOptions={{
         style: { background: '#0d1424', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }
       }} />
+      <ScrollToTop />
       <Routes>
-        <ScrollToTop />
         {/* Public */}
         <Route path="/"          element={<><Navbar /><Home /><Footer /></>} />
         <Route path="/about"     element={<><Navbar /><AboutPage /><Footer /></>} />
