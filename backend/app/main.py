@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from .database import Base, engine
 from .routers import contact, materials
@@ -39,6 +39,20 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+PUBLIC_GET_PREFIXES = (
+    "/api/admin/hero", "/api/admin/about", "/api/admin/stats",
+    "/api/admin/testimonials", "/api/admin/contact-info", "/api/admin/settings",
+    "/api/admin/branding", "/api/admin/banners", "/api/admin/about-bullets",
+    "/api/materials/",
+)
+
+@app.middleware("http")
+async def cache_headers(request: Request, call_next):
+    response: Response = await call_next(request)
+    if request.method == "GET" and request.url.path.startswith(tuple(PUBLIC_GET_PREFIXES)):
+        response.headers["Cache-Control"] = "public, max-age=300, stale-while-revalidate=600"
+    return response
 
 app.include_router(contact.router)
 app.include_router(materials.router)
