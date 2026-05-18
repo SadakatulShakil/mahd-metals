@@ -1,8 +1,30 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Phone, Mail, MapPin, Code2, Facebook, Instagram, Linkedin } from 'lucide-react'
+import { Phone, Mail, MapPin, Code2 } from 'lucide-react'
 import { fetchContactInfo, fetchBranding } from '../lib/api'
 import Logo from './Logo'
+
+const IconFacebook = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+)
+
+const IconInstagram = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+)
+
+const IconLinkedin = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+)
 
 export default function Footer() {
   const [info, setInfo]         = useState<any>(null)
@@ -18,10 +40,10 @@ export default function Footer() {
   const tagline   = branding?.company_tagline  || 'Your global partner in scrap and alloy metal trading.'
   const copyright = branding?.footer_copyright || '© 2026 Saddam Scrap and Metal. All rights reserved.'
   const locations = branding?.footer_locations || 'Jeddah · Kuwait · Global'
-  const developer   = branding?.developer_name   || null
-  const facebook    = branding?.facebook_url     || null
-  const instagram   = branding?.instagram_url    || null
-  const linkedin    = branding?.linkedin_url     || null
+  const developer = branding?.developer_name   || null
+  const fbUrl     = branding?.facebook_url     || '#'
+  const igUrl     = branding?.instagram_url    || '#'
+  const liUrl     = branding?.linkedin_url     || '#'
 
   return (
     <footer className="bg-[#020617] border-t border-white/[0.06]">
@@ -68,31 +90,26 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div className="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-gray-600 text-xs">{copyright}</div>
           <div className="text-gray-600 text-xs">{locations}</div>
-          {(facebook || instagram || linkedin) && (
-            <div className="flex items-center gap-3">
-              {facebook && (
-                <a href={facebook} target="_blank" rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-amber-400 transition-colors">
-                  <Facebook size={15} />
-                </a>
-              )}
-              {instagram && (
-                <a href={instagram} target="_blank" rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-amber-400 transition-colors">
-                  <Instagram size={15} />
-                </a>
-              )}
-              {linkedin && (
-                <a href={linkedin} target="_blank" rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-amber-400 transition-colors">
-                  <Linkedin size={15} />
-                </a>
-              )}
-            </div>
-          )}
+
+          {/* Social icons — always visible, URLs from admin panel */}
+          <div className="flex items-center gap-4">
+            <a href={fbUrl} target="_blank" rel="noopener noreferrer"
+              className="text-gray-500 hover:text-amber-400 transition-colors" aria-label="Facebook">
+              <IconFacebook />
+            </a>
+            <a href={igUrl} target="_blank" rel="noopener noreferrer"
+              className="text-gray-500 hover:text-amber-400 transition-colors" aria-label="Instagram">
+              <IconInstagram />
+            </a>
+            <a href={liUrl} target="_blank" rel="noopener noreferrer"
+              className="text-gray-500 hover:text-amber-400 transition-colors" aria-label="LinkedIn">
+              <IconLinkedin />
+            </a>
+          </div>
+
           {developer && (
             <div className="flex items-center gap-1.5 text-gray-600 text-xs">
               <Code2 size={11} className="text-amber-500/60" />
