@@ -64,12 +64,6 @@ export default function Materials() {
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <Link to="/materials"
-            className="inline-flex items-center gap-2 border border-amber-500/30 hover:border-amber-400 text-amber-400 hover:text-amber-300 px-8 py-3 rounded-xl transition-all hover:bg-amber-500/5">
-            View Full Portfolio <ArrowUpRight size={16} />
-          </Link>
-        </div>
       </div>
     </section>
   )

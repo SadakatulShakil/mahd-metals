@@ -48,7 +48,7 @@ export default function Hero() {
           <span className="text-gradient">{line2}</span>
         </h1>
 
-        <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">{sub}</p>
+        <p className="text-gray-100 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">{sub}</p>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
@@ -57,13 +57,13 @@ export default function Hero() {
             {cta1} <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link to="/materials"
-            className="flex items-center gap-2 glass hover:border-amber-500/30 text-gray-300 hover:text-white px-8 py-4 rounded-xl text-base transition-all duration-200 hover:bg-white/5">
+            className="flex items-center gap-2 bg-white border border-white/20 text-amber-500 font-semibold hover:bg-amber-50 px-8 py-4 rounded-xl text-base transition-all duration-200">
             {cta2}
           </Link>
         </div>
 
         {/* Trust pills */}
-        <div className="flex flex-wrap items-center justify-center gap-6 text-gray-500">
+        <div className="flex flex-wrap items-center justify-center gap-6 text-gray-200">
           {[
             { icon: ShieldCheck, text: '16+ Years Experience' },
             { icon: Globe,       text: '10+ Countries Served' },

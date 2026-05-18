@@ -11,6 +11,7 @@ const links = [
   { to: '/admin/hero',          label: 'Hero Banner',  icon: Image },
   { to: '/admin/banners',       label: 'Page Banners', icon: Layout },
   { to: '/admin/about',         label: 'About',        icon: Info },
+  { to: '/admin/about-bullets', label: 'About Bullets', icon: Info },
   { to: '/admin/stats',         label: 'Stats',        icon: BarChart2 },
   { to: '/admin/materials',     label: 'Materials',    icon: Package },
   { to: '/admin/testimonials',  label: 'Testimonials', icon: Star },

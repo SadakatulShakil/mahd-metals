@@ -20,6 +20,7 @@ import InboxPage from './admin/pages/InboxPage'
 import SettingsEditor from './admin/pages/SettingsEditor'
 import BrandingEditor from './admin/pages/BrandingEditor'
 import BannersEditor from './admin/pages/BannersEditor'
+import AboutBulletsEditor from './admin/pages/AboutBulletsEditor'
 
 export default function App() {
   return (
@@ -41,7 +42,8 @@ export default function App() {
           <Route path="branding"    element={<BrandingEditor />} />
           <Route path="hero"        element={<HeroEditor />} />
           <Route path="banners"     element={<BannersEditor />} />
-          <Route path="about"       element={<AboutEditor />} />
+          <Route path="about"           element={<AboutEditor />} />
+          <Route path="about-bullets"   element={<AboutBulletsEditor />} />
           <Route path="stats"       element={<StatsEditor />} />
           <Route path="materials"   element={<MaterialsEditor />} />
           <Route path="testimonials"element={<TestimonialsEditor />} />

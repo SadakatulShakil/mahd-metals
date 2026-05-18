@@ -87,6 +87,13 @@ class PageBanner(Base):
     min_height = Column(String(20), default="320px")
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
+class AboutBulletPoint(Base):
+    __tablename__ = "about_bullet_points"
+    id = Column(Integer, primary_key=True, index=True)
+    text = Column(String(300), nullable=False)
+    order = Column(Integer, default=0)
+    is_active = Column(Boolean, default=True)
+
 class BrandingContent(Base):
     __tablename__ = "branding_content"
     id = Column(Integer, primary_key=True)

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { fetchAbout } from '../lib/api'
+import { fetchAbout, fetchAboutBullets } from '../lib/api'
 import { CheckCircle2 } from 'lucide-react'
 
-const capabilities = [
+const DEFAULT_BULLETS = [
   'Precise sourcing of ferrous & non-ferrous materials',
-  'Global trading network across 30+ countries',
+  'Global trading network across 10+ countries',
   'End-to-end logistics and compliance management',
   'Specialty alloy and ferroalloy expertise',
   'Transparent, trust-based long-term partnerships',
@@ -12,9 +12,15 @@ const capabilities = [
 ]
 
 export default function About() {
-  const [data, setData] = useState<any>(null)
+  const [data, setData]       = useState<any>(null)
+  const [bullets, setBullets] = useState<any[]>([])
 
-  useEffect(() => { fetchAbout().then(r => setData(r.data)).catch(() => {}) }, [])
+  useEffect(() => {
+    fetchAbout().then(r => setData(r.data)).catch(() => {})
+    fetchAboutBullets().then(r => setBullets(r.data)).catch(() => {})
+  }, [])
+
+  const displayBullets = bullets.length > 0 ? bullets.map(b => b.text) : DEFAULT_BULLETS
 
   return (
     <section id="about" className="py-28 bg-[#020617]">
@@ -26,16 +32,16 @@ export default function About() {
               <span className="text-gradient">{data?.headline || 'Built on 40 Years of Gulf Expertise'}</span>
             </h2>
             <p className="text-gray-400 leading-relaxed mb-5">
-              {data?.body_paragraph1 || 'MAHD Metals International is founded by Mohammad Hamad Al Bahar (Kuwait) and Bandar Mohammad Al Ghamdi (Saudi Arabia).'}
+              {data?.body_paragraph1 || 'Saddam Scrap and Metal is founded by Mohammad Hamad Al Bahar (Kuwait) and Bandar Mohammad Al Ghamdi (Saudi Arabia).'}
             </p>
             <p className="text-gray-500 text-sm leading-relaxed mb-10">
               {data?.body_paragraph2 || 'From major construction and industrial projects to banking and international trade, our founders bring unmatched credibility to every deal.'}
             </p>
             <div className="space-y-3">
-              {capabilities.map(c => (
-                <div key={c} className="flex items-center gap-3">
+              {displayBullets.map((text, i) => (
+                <div key={i} className="flex items-center gap-3">
                   <CheckCircle2 size={16} className="text-amber-400 shrink-0" />
-                  <span className="text-gray-400 text-sm">{c}</span>
+                  <span className="text-gray-400 text-sm">{text}</span>
                 </div>
               ))}
             </div>
@@ -44,9 +50,8 @@ export default function About() {
           <div className="relative">
             <div className="absolute -inset-px bg-gradient-to-br from-amber-500/20 via-transparent to-transparent rounded-2xl blur-sm" />
             <div className="relative glass rounded-2xl overflow-hidden">
-              {/* About photo from Cloudinary */}
               {data?.photo_url && (
-                <img src={data.photo_url} alt="About MAHD Metals"
+                <img src={data.photo_url} alt="About Saddam Scrap and Metal"
                   className="w-full h-56 object-cover border-b border-white/5" />
               )}
               <div className="p-8">

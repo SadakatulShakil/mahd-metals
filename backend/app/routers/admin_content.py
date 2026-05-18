@@ -5,12 +5,13 @@ from ..auth import get_current_admin
 from ..cloudinary_helper import upload_image
 from ..models.site_content import (
     HeroContent, AboutContent, StatsContent,
-    Testimonial, ContactInfo, SiteSettings
+    Testimonial, ContactInfo, SiteSettings, AboutBulletPoint
 )
 from ..models.material import Material
 from ..schemas.site_content import (
     HeroContentSchema, AboutContentSchema, StatsContentSchema,
-    TestimonialCreate, TestimonialResponse, ContactInfoSchema, SiteSettingsSchema
+    TestimonialCreate, TestimonialResponse, ContactInfoSchema, SiteSettingsSchema,
+    AboutBulletCreate, AboutBulletResponse
 )
 from ..schemas.material import MaterialBase, MaterialResponse
 from typing import List
@@ -241,6 +242,37 @@ async def upload_banner_image(page: str, file: UploadFile = File(...), db: Sessi
     obj.image_url = result["url"]
     db.commit()
     return {"url": result["url"]}
+
+# ── ABOUT BULLET POINTS ───────────────────────────────
+@router.get("/about-bullets", response_model=List[AboutBulletResponse])
+def get_about_bullets(db: Session = Depends(get_db)):
+    return db.query(AboutBulletPoint).filter(AboutBulletPoint.is_active == True).order_by(AboutBulletPoint.order).all()
+
+@router.get("/about-bullets/all", response_model=List[AboutBulletResponse])
+def get_all_about_bullets(db: Session = Depends(get_db), _=Depends(get_current_admin)):
+    return db.query(AboutBulletPoint).order_by(AboutBulletPoint.order).all()
+
+@router.post("/about-bullets", response_model=AboutBulletResponse)
+def create_about_bullet(data: AboutBulletCreate, db: Session = Depends(get_db), _=Depends(get_current_admin)):
+    obj = AboutBulletPoint(**data.model_dump())
+    db.add(obj); db.commit(); db.refresh(obj)
+    return obj
+
+@router.put("/about-bullets/{bid}", response_model=AboutBulletResponse)
+def update_about_bullet(bid: int, data: AboutBulletCreate, db: Session = Depends(get_db), _=Depends(get_current_admin)):
+    obj = db.query(AboutBulletPoint).filter(AboutBulletPoint.id == bid).first()
+    if not obj: raise HTTPException(404, "Not found")
+    for k, v in data.model_dump().items():
+        setattr(obj, k, v)
+    db.commit(); db.refresh(obj)
+    return obj
+
+@router.delete("/about-bullets/{bid}")
+def delete_about_bullet(bid: int, db: Session = Depends(get_db), _=Depends(get_current_admin)):
+    obj = db.query(AboutBulletPoint).filter(AboutBulletPoint.id == bid).first()
+    if not obj: raise HTTPException(404, "Not found")
+    db.delete(obj); db.commit()
+    return {"success": True}
 
 # ── BRANDING ──────────────────────────────────────
 @router.get("/branding", response_model=BrandingSchema)

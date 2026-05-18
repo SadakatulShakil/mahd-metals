@@ -88,6 +88,16 @@ class PageBannerSchema(BaseModel):
     class Config:
         from_attributes = True
 
+class AboutBulletCreate(BaseModel):
+    text: str
+    order: int = 0
+    is_active: bool = True
+
+class AboutBulletResponse(AboutBulletCreate):
+    id: int
+    class Config:
+        from_attributes = True
+
 class BrandingSchema(BaseModel):
     logo_text_primary: Optional[str] = None
     logo_text_secondary: Optional[str] = None
