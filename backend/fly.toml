@@ -1,5 +1,5 @@
 app = "mahd-metals-api"
-primary_region = "sin"
+primary_region = "fra"
 
 [build]
   dockerfile = "Dockerfile"
