@@ -23,6 +23,7 @@ export default function ContactInfoEditor() {
 
   const fields = [
     ['Phone', 'phone'], ['WhatsApp Number', 'whatsapp'],
+    ['Alternative Phone Label', 'phone_alternative_label'], ['Alternative Phone Number', 'phone_alternative'],
     ['Email', 'email'], ['Address Line 1', 'address_line1'],
     ['Address Line 2', 'address_line2'], ['City', 'city'],
     ['Postal Code', 'postal_code'], ['Country', 'country'],

@@ -58,6 +58,8 @@ class ContactInfo(Base):
     __tablename__ = "contact_info"
     id = Column(Integer, primary_key=True)
     phone = Column(String(50), default="+966 54 666 2697")
+    phone_alternative = Column(String(50), nullable=True)
+    phone_alternative_label = Column(String(100), default="Alternative")
     whatsapp = Column(String(50), default="966546662697")
     email = Column(String(150), default="info@mahdmetals.com")
     address_line1 = Column(String(200), default="3469 Al Sarawat District")

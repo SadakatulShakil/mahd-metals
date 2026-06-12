@@ -57,6 +57,8 @@ class TestimonialResponse(TestimonialCreate):
 
 class ContactInfoSchema(BaseModel):
     phone: Optional[str] = None
+    phone_alternative: Optional[str] = None
+    phone_alternative_label: Optional[str] = None
     whatsapp: Optional[str] = None
     email: Optional[str] = None
     address_line1: Optional[str] = None
