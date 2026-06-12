@@ -37,7 +37,6 @@ export default function Footer() {
 
   const phone     = info?.phone                || '+966 54 666 2697'
   const altPhone  = info?.phone_alternative    || null
-  const altLabel  = info?.phone_alternative_label || 'Alternative'
   const email     = info?.email                || 'info@mahdmetals.com'
   const tagline   = branding?.company_tagline  || 'Your global partner in scrap and alloy metal trading.'
   const copyright = branding?.footer_copyright || '© 2026 Saddam Scrap and Metal. All rights reserved.'
