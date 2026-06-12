@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://mahdmetals.com/sitemap.xml
+Disallow: /admin
+Sitemap: https://saddamscarpandmetal.com/sitemap.xml

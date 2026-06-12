@@ -18,7 +18,7 @@ export default function ContactForm() {
   const phone             = info?.phone                  || '+966 54 666 2697'
   const phoneAlt          = info?.phone_alternative       || ''
   const phoneAltLabel     = info?.phone_alternative_label || 'Alternative'
-  const email    = info?.email         || 'info@mahdmetals.com'
+  const email    = info?.email         || 'info@saddamscarpandmetal.com'
   const whatsapp = info?.whatsapp      || '966546662697'
   const address  = info
     ? `${info.address_line1}, ${info.address_line2}, ${info.city} ${info.postal_code}, ${info.country}`
