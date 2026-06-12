@@ -36,6 +36,8 @@ export default function Footer() {
   }, [])
 
   const phone     = info?.phone                || '+966 54 666 2697'
+  const altPhone  = info?.phone_alternative    || null
+  const altLabel  = info?.phone_alternative_label || 'Alternative'
   const email     = info?.email                || 'info@mahdmetals.com'
   const tagline   = branding?.company_tagline  || 'Your global partner in scrap and alloy metal trading.'
   const copyright = branding?.footer_copyright || '© 2026 Saddam Scrap and Metal. All rights reserved.'
@@ -54,8 +56,9 @@ export default function Footer() {
             <p className="text-gray-500 text-sm leading-relaxed max-w-xs mb-6">{tagline}</p>
             <div className="space-y-2">
               {[
-                { icon: Phone, text: phone, href: `tel:${phone}` },
-                { icon: Mail,  text: email, href: `mailto:${email}` },
+                { icon: Phone, text: phone,    href: `tel:${phone}` },
+                ...(altPhone ? [{ icon: Phone, text: altPhone, href: `tel:${altPhone}` }] : []),
+                { icon: Mail,  text: email,    href: `mailto:${email}` },
               ].map(({ icon: Icon, text, href }) => (
                 <a key={text} href={href}
                   className="flex items-center gap-2 text-gray-500 hover:text-amber-400 text-sm transition-colors">

@@ -43,7 +43,7 @@ export default function ContactForm() {
             </div>
             {[
               { icon: Phone,  label: 'Phone / WhatsApp', value: phone,   href: `tel:${phone}` },
-              ...(phoneAlt ? [{ icon: Phone, label: phoneAltLabel, value: phoneAlt, href: `tel:${phoneAlt}` }] : []),
+              ...(phoneAlt ? [{ icon: Phone, label: phoneAltLabel, value: phoneAlt, href: `tel:${info?.phone_alternative}` }] : []),
               { icon: Mail,   label: 'Email',            value: email,   href: `mailto:${email}` },
               { icon: MapPin, label: 'Address',          value: address, href: '#' },
             ].map(({ icon: Icon, label, value, href }) => (
