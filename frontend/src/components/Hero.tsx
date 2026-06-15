@@ -14,7 +14,6 @@ export default function Hero() {
   const line1    = data?.headline_line1    || 'Your Global Partner in'
   const line2    = data?.headline_line2    || 'Scrap & Alloy Metals'
   const sub      = data?.subheadline       || 'RE METAL connects the global supply chain with premium ferrous, non-ferrous, and specialty alloy metals — backed by 16+ years of Gulf expertise.'
-  const cta1     = data?.cta_primary_text  || 'Request a Quote'
   const cta2     = data?.cta_secondary_text|| 'Explore Materials'
   const bgImage  = data?.bg_image_url      || null
 
