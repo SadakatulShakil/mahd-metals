@@ -24,6 +24,10 @@ import SettingsEditor from './admin/pages/SettingsEditor'
 import BrandingEditor from './admin/pages/BrandingEditor'
 import BannersEditor from './admin/pages/BannersEditor'
 import AboutBulletsEditor from './admin/pages/AboutBulletsEditor'
+import BlogPage from './pages/Blog'
+import BlogPostPage from './pages/BlogPost'
+import BlogEditor from './admin/pages/BlogEditor'
+import FAQEditor from './admin/pages/FAQEditor'
 
 export default function App() {
   return (
@@ -39,6 +43,8 @@ export default function App() {
         <Route path="/about"     element={<><Navbar /><AboutPage /><Footer /></>} />
         <Route path="/materials" element={<><Navbar /><MaterialsPage /><Footer /></>} />
         <Route path="/contact"   element={<><Navbar /><ContactPage /><Footer /></>} />
+        <Route path="/blog"      element={<><Navbar /><BlogPage /><Footer /></>} />
+        <Route path="/blog/:slug" element={<><Navbar /><BlogPostPage /><Footer /></>} />
 
         {/* Admin */}
         <Route path="/admin/login" element={<LoginPage />} />
@@ -55,6 +61,8 @@ export default function App() {
           <Route path="contact-info"element={<ContactInfoEditor />} />
           <Route path="inbox"       element={<InboxPage />} />
           <Route path="settings"    element={<SettingsEditor />} />
+          <Route path="blog"        element={<BlogEditor />} />
+          <Route path="faq"         element={<FAQEditor />} />
         </Route>
       </Routes>
       <Chatbot />

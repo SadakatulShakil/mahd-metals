@@ -1,6 +1,7 @@
 import SEO from '../components/SEO'
 import PageBanner from '../components/PageBanner'
 import ContactForm from '../components/ContactForm'
+import FAQ from '../components/FAQ'
 
 export default function ContactPage() {
   return (
@@ -12,6 +13,7 @@ export default function ContactPage() {
       />
       <PageBanner page="contact" defaultTitle="Contact Us"
         defaultSubtitle="Request a quote or get in touch with our global trading team." />
+      <FAQ />
       <ContactForm />
     </main>
   )

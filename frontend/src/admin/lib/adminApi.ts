@@ -73,3 +73,19 @@ export const markRead = (id: number) => adminApi.put(`/api/admin/submissions/${i
 // Settings
 export const getSiteSettings = () => adminApi.get('/api/admin/settings')
 export const updateSiteSettings = (data: any) => adminApi.put('/api/admin/settings', data)
+
+// Blog
+export const getAdminBlogPosts = () => adminApi.get('/api/admin/blog')
+export const createBlogPost = (data: any) => adminApi.post('/api/admin/blog', data)
+export const updateBlogPost = (id: number, data: any) => adminApi.put(`/api/admin/blog/${id}`, data)
+export const deleteBlogPost = (id: number) => adminApi.delete(`/api/admin/blog/${id}`)
+export const uploadBlogImage = (id: number, file: File) => {
+  const fd = new FormData(); fd.append('file', file)
+  return adminApi.post(`/api/admin/blog/${id}/image`, fd)
+}
+
+// FAQs
+export const getFAQs = () => adminApi.get('/api/admin/faqs')
+export const createFAQ = (data: any) => adminApi.post('/api/admin/faqs', data)
+export const updateFAQ = (id: number, data: any) => adminApi.put(`/api/admin/faqs/${id}`, data)
+export const deleteFAQ = (id: number) => adminApi.delete(`/api/admin/faqs/${id}`)

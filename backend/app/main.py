@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from .database import Base, engine
 from .routers import contact, materials
 from .routers import auth, admin_content
+from .routers import blog
+from .models import blog as blog_models  # noqa: F401 — registers BlogPost with Base
 from .config import settings
 
 Base.metadata.create_all(bind=engine)
@@ -44,6 +46,8 @@ PUBLIC_GET_PREFIXES = (
     "/api/admin/hero", "/api/admin/about", "/api/admin/stats",
     "/api/admin/testimonials", "/api/admin/contact-info", "/api/admin/settings",
     "/api/admin/branding", "/api/admin/banners", "/api/admin/about-bullets",
+    "/api/admin/faqs",
+    "/api/blog",
     "/api/materials/",
 )
 
@@ -58,6 +62,7 @@ app.include_router(contact.router)
 app.include_router(materials.router)
 app.include_router(auth.router)
 app.include_router(admin_content.router)
+app.include_router(blog.router)
 
 @app.get("/api/health")
 def health_check():

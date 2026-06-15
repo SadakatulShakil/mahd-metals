@@ -115,3 +115,13 @@ class BrandingSchema(BaseModel):
 
     class Config:
         from_attributes = True
+
+class FAQSchema(BaseModel):
+    id: Optional[int] = None
+    question: Optional[str] = None
+    answer: Optional[str] = None
+    order: Optional[int] = 0
+    is_active: Optional[bool] = True
+
+    class Config:
+        from_attributes = True

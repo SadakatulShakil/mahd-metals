@@ -5,7 +5,7 @@ import { saveToken } from '../lib/auth'
 import toast from 'react-hot-toast'
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('admin@saddamscarpandmetal.com')
+  const [email, setEmail] = useState('admin@website.com')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -64,7 +64,7 @@ export default function LoginPage() {
           </form>
         </div>
         <p className="text-center text-gray-600 text-xs mt-4">
-          Default: admin@saddamscarpandmetal.com / admin123
+          Default: admin@website.com / admin123
         </p>
       </div>
     </div>

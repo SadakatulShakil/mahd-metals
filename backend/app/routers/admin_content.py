@@ -5,13 +5,13 @@ from ..auth import get_current_admin
 from ..cloudinary_helper import upload_image
 from ..models.site_content import (
     HeroContent, AboutContent, StatsContent,
-    Testimonial, ContactInfo, SiteSettings, AboutBulletPoint
+    Testimonial, ContactInfo, SiteSettings, AboutBulletPoint, FAQ
 )
 from ..models.material import Material
 from ..schemas.site_content import (
     HeroContentSchema, AboutContentSchema, StatsContentSchema,
     TestimonialCreate, TestimonialResponse, ContactInfoSchema, SiteSettingsSchema,
-    AboutBulletCreate, AboutBulletResponse
+    AboutBulletCreate, AboutBulletResponse, FAQSchema
 )
 from ..schemas.material import MaterialBase, MaterialResponse
 from typing import List
@@ -295,3 +295,36 @@ async def upload_logo(file: UploadFile = File(...), db: Session = Depends(get_db
     obj.logo_image_url = result["url"]
     db.commit()
     return {"url": result["url"]}
+
+# ── FAQs ──────────────────────────────────────────
+@router.get("/faqs", response_model=List[FAQSchema])
+def get_faqs(db: Session = Depends(get_db)):
+    return db.query(FAQ).order_by(FAQ.order).all()
+
+@router.post("/faqs", response_model=FAQSchema)
+def create_faq(data: FAQSchema, db: Session = Depends(get_db), _=Depends(get_current_admin)):
+    faq = FAQ(**data.model_dump(exclude={'id'}))
+    db.add(faq)
+    db.commit()
+    db.refresh(faq)
+    return faq
+
+@router.put("/faqs/{id}", response_model=FAQSchema)
+def update_faq(id: int, data: FAQSchema, db: Session = Depends(get_db), _=Depends(get_current_admin)):
+    faq = db.query(FAQ).filter(FAQ.id == id).first()
+    if not faq:
+        raise HTTPException(status_code=404, detail="Not found")
+    for k, v in data.model_dump(exclude_none=True, exclude={'id'}).items():
+        setattr(faq, k, v)
+    db.commit()
+    db.refresh(faq)
+    return faq
+
+@router.delete("/faqs/{id}")
+def delete_faq(id: int, db: Session = Depends(get_db), _=Depends(get_current_admin)):
+    faq = db.query(FAQ).filter(FAQ.id == id).first()
+    if not faq:
+        raise HTTPException(status_code=404, detail="Not found")
+    db.delete(faq)
+    db.commit()
+    return {"ok": True}

@@ -2,7 +2,8 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { clearToken } from '../lib/auth'
 import {
   LayoutDashboard, Image, Info, BarChart2, Package,
-  Star, Phone, Inbox, Settings, LogOut, Palette, Layout
+  Star, Phone, Inbox, Settings, LogOut, Palette, Layout,
+  BookOpen, HelpCircle
 } from 'lucide-react'
 
 const links = [
@@ -16,6 +17,8 @@ const links = [
   { to: '/admin/materials',     label: 'Materials',    icon: Package },
   { to: '/admin/testimonials',  label: 'Testimonials', icon: Star },
   { to: '/admin/contact-info',  label: 'Contact Info', icon: Phone },
+  { to: '/admin/blog',          label: 'Blog',         icon: BookOpen },
+  { to: '/admin/faq',           label: 'FAQ',          icon: HelpCircle },
   { to: '/admin/inbox',         label: 'Inbox',        icon: Inbox },
   { to: '/admin/settings',      label: 'Site Settings',icon: Settings },
 ]

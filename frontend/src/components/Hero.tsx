@@ -52,10 +52,12 @@ export default function Hero() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
-          <Link to="/contact"
+          <a href="https://wa.me/966057296781"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-[#020617] font-bold px-8 py-4 rounded-xl text-base transition-all duration-200 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/20">
-            {cta1} <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
+            WhatsApp Now <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          </a>
           <Link to="/materials"
             className="flex items-center gap-2 bg-white border border-white/20 text-amber-500 font-semibold hover:bg-amber-50 px-8 py-4 rounded-xl text-base transition-all duration-200">
             {cta2}
