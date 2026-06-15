@@ -4,6 +4,7 @@ import Stats from '../components/Stats'
 import About from '../components/About'
 import Materials from '../components/Materials'
 import Testimonials from '../components/Testimonials'
+import FAQ from '../components/FAQ'
 import ContactForm from '../components/ContactForm'
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <About />
       <Materials />
       <Testimonials />
+      <FAQ />
       <ContactForm />
     </main>
   )
