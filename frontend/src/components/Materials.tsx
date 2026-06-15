@@ -41,7 +41,7 @@ export default function Materials() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {materials.map(m => (
-            <Link key={m.slug} to={`/materials#${m.slug}`}
+            <Link key={m.slug} to={`/materials/${m.slug}`}
               className={`group relative bg-[#0d1424] border border-white/5 ${hoverBorder[m.category] || 'group-hover:border-amber-500/40'} rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/40 hover:bg-[#111827]`}>
               {/* Material image */}
               {m.image_url && (

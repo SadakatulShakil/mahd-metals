@@ -1,8 +1,15 @@
 from fastapi import APIRouter, Depends, UploadFile, File, HTTPException
 from sqlalchemy.orm import Session
+import re
 from ..database import get_db
 from ..auth import get_current_admin
 from ..cloudinary_helper import upload_image
+
+def _make_slug(name: str) -> str:
+    slug = name.lower().strip()
+    slug = re.sub(r'[^\w\s-]', '', slug)
+    slug = re.sub(r'[\s_-]+', '-', slug)
+    return slug
 from ..models.site_content import (
     HeroContent, AboutContent, StatsContent,
     Testimonial, ContactInfo, SiteSettings, AboutBulletPoint, FAQ
@@ -127,7 +134,11 @@ def get_materials(db: Session = Depends(get_db), _=Depends(get_current_admin)):
 
 @router.post("/materials", response_model=MaterialResponse)
 def create_material(data: MaterialBase, db: Session = Depends(get_db), _=Depends(get_current_admin)):
-    obj = Material(**data.model_dump())
+    slug = data.slug or _make_slug(data.name)
+    if db.query(Material).filter(Material.slug == slug).first():
+        slug = f"{slug}-{db.query(Material).count()}"
+    fields = data.model_dump(exclude={'slug'})
+    obj = Material(**fields, slug=slug)
     db.add(obj)
     db.commit()
     db.refresh(obj)
@@ -138,7 +149,10 @@ def update_material(mid: int, data: MaterialBase, db: Session = Depends(get_db),
     obj = db.query(Material).filter(Material.id == mid).first()
     if not obj:
         raise HTTPException(404, "Not found")
-    for k, v in data.model_dump().items():
+    fields = data.model_dump(exclude_none=True)
+    if not fields.get('slug'):
+        fields['slug'] = _make_slug(data.name)
+    for k, v in fields.items():
         setattr(obj, k, v)
     db.commit()
     db.refresh(obj)

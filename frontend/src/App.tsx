@@ -24,6 +24,7 @@ import SettingsEditor from './admin/pages/SettingsEditor'
 import BrandingEditor from './admin/pages/BrandingEditor'
 import BannersEditor from './admin/pages/BannersEditor'
 import AboutBulletsEditor from './admin/pages/AboutBulletsEditor'
+import MaterialDetail from './pages/MaterialDetail'
 import BlogPage from './pages/Blog'
 import BlogPostPage from './pages/BlogPost'
 import BlogEditor from './admin/pages/BlogEditor'
@@ -42,6 +43,7 @@ export default function App() {
         <Route path="/"          element={<><Navbar /><Home /><Footer /></>} />
         <Route path="/about"     element={<><Navbar /><AboutPage /><Footer /></>} />
         <Route path="/materials" element={<><Navbar /><MaterialsPage /><Footer /></>} />
+        <Route path="/materials/:slug" element={<><Navbar /><MaterialDetail /><Footer /></>} />
         <Route path="/contact"   element={<><Navbar /><ContactPage /><Footer /></>} />
         <Route path="/blog"      element={<><Navbar /><BlogPage /><Footer /></>} />
         <Route path="/blog/:slug" element={<><Navbar /><BlogPostPage /><Footer /></>} />

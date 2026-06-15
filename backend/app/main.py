@@ -15,6 +15,14 @@ with engine.connect() as conn:
         "ALTER TABLE branding_content ADD COLUMN IF NOT EXISTS facebook_url VARCHAR(500)",
         "ALTER TABLE branding_content ADD COLUMN IF NOT EXISTS instagram_url VARCHAR(500)",
         "ALTER TABLE branding_content ADD COLUMN IF NOT EXISTS linkedin_url VARCHAR(500)",
+        "ALTER TABLE materials ADD COLUMN IF NOT EXISTS full_description TEXT",
+        "ALTER TABLE materials ADD COLUMN IF NOT EXISTS specifications TEXT",
+        "ALTER TABLE materials ADD COLUMN IF NOT EXISTS applications VARCHAR(500)",
+        "ALTER TABLE materials ADD COLUMN IF NOT EXISTS origin_countries VARCHAR(500)",
+        "ALTER TABLE materials ADD COLUMN IF NOT EXISTS min_order VARCHAR(100)",
+        "ALTER TABLE materials ADD COLUMN IF NOT EXISTS packaging VARCHAR(200)",
+        "ALTER TABLE materials ADD COLUMN IF NOT EXISTS meta_title VARCHAR(300)",
+        "ALTER TABLE materials ADD COLUMN IF NOT EXISTS meta_description VARCHAR(500)",
     ]:
         try:
             conn.execute(__import__('sqlalchemy').text(col))

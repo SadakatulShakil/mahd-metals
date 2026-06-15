@@ -13,3 +13,11 @@ class Material(Base):
     seo_description = Column(String(300), nullable=True)
     image_url = Column(String(500), nullable=True)
     is_active = Column(Boolean, default=True)
+    full_description = Column(Text, nullable=True)
+    specifications = Column(Text, nullable=True)       # JSON string: [{"key":…,"value":…}]
+    applications = Column(String(500), nullable=True)  # comma-separated
+    origin_countries = Column(String(500), nullable=True)
+    min_order = Column(String(100), nullable=True)
+    packaging = Column(String(200), nullable=True)
+    meta_title = Column(String(300), nullable=True)
+    meta_description = Column(String(500), nullable=True)
