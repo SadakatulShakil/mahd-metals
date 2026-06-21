@@ -20,8 +20,34 @@ export default function FAQ() {
         const active = (r.data as FAQItem[]).filter(f => f.is_active)
         setFaqs(active)
         if (active.length > 0) setOpen(active[0].id)
+
+        if (active.length > 0) {
+          const schema = {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: active.map(faq => ({
+              '@type': 'Question',
+              name: faq.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: faq.answer,
+              },
+            })),
+          }
+          const existing = document.getElementById('faq-schema')
+          if (existing) existing.remove()
+          const script = document.createElement('script')
+          script.id = 'faq-schema'
+          script.type = 'application/ld+json'
+          script.text = JSON.stringify(schema)
+          document.head.appendChild(script)
+        }
       })
       .catch(() => {})
+
+    return () => {
+      document.getElementById('faq-schema')?.remove()
+    }
   }, [])
 
   if (faqs.length === 0) return null
