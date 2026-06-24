@@ -7,6 +7,8 @@ interface FAQItem {
   id: number
   question: string
   answer: string
+  question_ar: string
+  answer_ar: string
   order: number
   is_active: boolean
 }
@@ -14,6 +16,8 @@ interface FAQItem {
 const emptyFAQ = (): Omit<FAQItem, 'id'> => ({
   question: '',
   answer: '',
+  question_ar: '',
+  answer_ar: '',
   order: 0,
   is_active: true,
 })
@@ -129,7 +133,7 @@ export default function FAQEditor() {
 
             <div className="flex-1 p-6 space-y-5 overflow-y-auto">
               <div>
-                <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">Question *</label>
+                <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">Question (English) *</label>
                 <input
                   value={editing.question || ''}
                   onChange={e => setEditing(p => ({ ...p!, question: e.target.value }))}
@@ -139,13 +143,36 @@ export default function FAQEditor() {
               </div>
 
               <div>
-                <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">Answer *</label>
+                <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">السؤال بالعربي</label>
+                <input
+                  value={editing.question_ar || ''}
+                  onChange={e => setEditing(p => ({ ...p!, question_ar: e.target.value }))}
+                  className="w-full bg-[#1a2235] border border-white/10 focus:border-amber-500 rounded-xl px-4 py-3 text-white outline-none text-sm text-right"
+                  placeholder="ما هو سؤالك؟"
+                  dir="rtl"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">Answer (English) *</label>
                 <textarea
                   value={editing.answer || ''}
                   onChange={e => setEditing(p => ({ ...p!, answer: e.target.value }))}
-                  rows={6}
+                  rows={4}
                   className="w-full bg-[#1a2235] border border-white/10 focus:border-amber-500 rounded-xl px-4 py-3 text-white outline-none text-sm resize-none"
                   placeholder="Write the full answer here..."
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">الإجابة بالعربي</label>
+                <textarea
+                  value={editing.answer_ar || ''}
+                  onChange={e => setEditing(p => ({ ...p!, answer_ar: e.target.value }))}
+                  rows={4}
+                  className="w-full bg-[#1a2235] border border-white/10 focus:border-amber-500 rounded-xl px-4 py-3 text-white outline-none text-sm resize-none text-right"
+                  placeholder="اكتب الإجابة الكاملة هنا..."
+                  dir="rtl"
                 />
               </div>
 

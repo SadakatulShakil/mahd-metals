@@ -26,6 +26,12 @@ with engine.connect() as conn:
         "ALTER TABLE materials ADD COLUMN IF NOT EXISTS name_ar VARCHAR(200)",
         "ALTER TABLE materials ADD COLUMN IF NOT EXISTS description_ar TEXT",
         "ALTER TABLE materials ADD COLUMN IF NOT EXISTS full_description_ar TEXT",
+        "ALTER TABLE about_content ADD COLUMN IF NOT EXISTS headline_ar VARCHAR(300)",
+        "ALTER TABLE about_content ADD COLUMN IF NOT EXISTS body_paragraph1_ar TEXT",
+        "ALTER TABLE about_content ADD COLUMN IF NOT EXISTS body_paragraph2_ar TEXT",
+        "ALTER TABLE about_content ADD COLUMN IF NOT EXISTS quote_text_ar TEXT",
+        "ALTER TABLE faqs ADD COLUMN IF NOT EXISTS question_ar VARCHAR(500)",
+        "ALTER TABLE faqs ADD COLUMN IF NOT EXISTS answer_ar TEXT",
     ]:
         try:
             conn.execute(__import__('sqlalchemy').text(col))

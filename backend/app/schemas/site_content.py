@@ -24,6 +24,10 @@ class AboutContentSchema(BaseModel):
     operations: Optional[str] = None
     specialty: Optional[str] = None
     quote_text: Optional[str] = None
+    headline_ar: Optional[str] = None
+    body_paragraph1_ar: Optional[str] = None
+    body_paragraph2_ar: Optional[str] = None
+    quote_text_ar: Optional[str] = None
 
     class Config:
         from_attributes = True
@@ -120,6 +124,8 @@ class FAQSchema(BaseModel):
     id: Optional[int] = None
     question: Optional[str] = None
     answer: Optional[str] = None
+    question_ar: Optional[str] = None
+    answer_ar: Optional[str] = None
     order: Optional[int] = 0
     is_active: Optional[bool] = True
 

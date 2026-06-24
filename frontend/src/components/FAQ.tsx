@@ -7,6 +7,8 @@ interface FAQItem {
   id: number
   question: string
   answer: string
+  question_ar: string | null
+  answer_ar: string | null
   order: number
   is_active: boolean
 }
@@ -14,7 +16,8 @@ interface FAQItem {
 export default function FAQ() {
   const [faqs, setFaqs] = useState<FAQItem[]>([])
   const [open, setOpen] = useState<number | null>(null)
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isAr = i18n.language === 'ar'
 
   useEffect(() => {
     api.get('/api/admin/faqs')
@@ -71,7 +74,7 @@ export default function FAQ() {
                   className="w-full flex items-center justify-between px-6 py-4 text-start"
                 >
                   <span className={`font-semibold text-sm md:text-base transition-colors ${isOpen ? 'text-amber-400' : 'text-white'}`}>
-                    {faq.question}
+                    {isAr ? (faq.question_ar || faq.question) : faq.question}
                   </span>
                   <ChevronDown
                     size={18}
@@ -79,7 +82,7 @@ export default function FAQ() {
                   />
                 </button>
                 <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                  <p className="px-6 pb-5 text-gray-300 text-sm leading-relaxed">{faq.answer}</p>
+                  <p className="px-6 pb-5 text-gray-300 text-sm leading-relaxed">{isAr ? (faq.answer_ar || faq.answer) : faq.answer}</p>
                 </div>
               </div>
             )

@@ -15,7 +15,8 @@ const DEFAULT_BULLETS = [
 export default function About() {
   const [data, setData]       = useState<any>(null)
   const [bullets, setBullets] = useState<any[]>([])
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isAr = i18n.language === 'ar'
 
   useEffect(() => {
     fetchAbout().then(r => setData(r.data)).catch(() => {})
@@ -24,6 +25,19 @@ export default function About() {
 
   const displayBullets = bullets.length > 0 ? bullets.map(b => b.text) : DEFAULT_BULLETS
 
+  const headline = isAr
+    ? (data?.headline_ar || data?.headline || 'مبني على 40 عاماً من الخبرة الخليجية')
+    : (data?.headline || 'Built on 40 Years of Gulf Expertise')
+  const para1 = isAr
+    ? (data?.body_paragraph1_ar || data?.body_paragraph1 || 'تأسست شركة صدام للخردة والمعادن على يد محمد حمد البحر (الكويت) وبندر محمد الغامدي (المملكة العربية السعودية).')
+    : (data?.body_paragraph1 || 'Saddam Scrap and Metal is founded by Mohammad Hamad Al Bahar (Kuwait) and Bandar Mohammad Al Ghamdi (Saudi Arabia).')
+  const para2 = isAr
+    ? (data?.body_paragraph2_ar || data?.body_paragraph2 || 'من المشاريع الإنشائية والصناعية الكبرى إلى القطاع المصرفي والتجارة الدولية، يجلب مؤسسونا مصداقية لا مثيل لها لكل صفقة.')
+    : (data?.body_paragraph2 || 'From major construction and industrial projects to banking and international trade, our founders bring unmatched credibility to every deal.')
+  const quoteText = isAr
+    ? (data?.quote_text_ar || data?.quote_text || 'نستفيد من أكثر من 40 عاماً من الخبرة العملية في القطاعات الرئيسية بالخليج والشرق الأوسط.')
+    : (data?.quote_text || 'Leveraging more than 40 years of hands-on experience in the Gulf and Middle East\'s key sectors.')
+
   return (
     <section id="about" className="py-28 bg-[#020617]">
       <div className="max-w-6xl mx-auto px-6">
@@ -31,13 +45,13 @@ export default function About() {
           <div>
             <div className="section-label mb-3">{data?.section_label || t('about.sectionLabel')}</div>
             <h2 className="text-4xl md:text-5xl font-black leading-tight mb-6">
-              <span className="text-gradient">{data?.headline || 'Built on 40 Years of Gulf Expertise'}</span>
+              <span className="text-gradient">{headline}</span>
             </h2>
             <p className="text-gray-400 leading-relaxed mb-5">
-              {data?.body_paragraph1 || 'Saddam Scrap and Metal is founded by Mohammad Hamad Al Bahar (Kuwait) and Bandar Mohammad Al Ghamdi (Saudi Arabia).'}
+              {para1}
             </p>
             <p className="text-gray-500 text-sm leading-relaxed mb-10">
-              {data?.body_paragraph2 || 'From major construction and industrial projects to banking and international trade, our founders bring unmatched credibility to every deal.'}
+              {para2}
             </p>
             <div className="space-y-3">
               {displayBullets.map((text, i) => (
@@ -72,7 +86,7 @@ export default function About() {
                 </div>
                 <div className="bg-amber-500/5 border border-amber-500/15 rounded-xl p-5">
                   <p className="text-amber-200/70 text-sm leading-relaxed italic">
-                    "{data?.quote_text || 'Leveraging more than 40 years of hands-on experience in the Gulf and Middle East\'s key sectors.'}"
+                    "{quoteText}"
                   </p>
                 </div>
               </div>

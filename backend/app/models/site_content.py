@@ -27,6 +27,10 @@ class AboutContent(Base):
     operations = Column(String(100), default="Gulf & Global")
     specialty = Column(String(100), default="Alloys & Scrap")
     quote_text = Column(Text, default="Leveraging more than 40 years of hands-on experience in the Gulf and Middle East's key sectors.")
+    headline_ar = Column(String(300), nullable=True)
+    body_paragraph1_ar = Column(Text, nullable=True)
+    body_paragraph2_ar = Column(Text, nullable=True)
+    quote_text_ar = Column(Text, nullable=True)
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
 class StatsContent(Base):
@@ -117,6 +121,8 @@ class FAQ(Base):
     id = Column(Integer, primary_key=True)
     question = Column(String(500), nullable=False)
     answer = Column(Text, nullable=False)
+    question_ar = Column(String(500), nullable=True)
+    answer_ar = Column(Text, nullable=True)
     order = Column(Integer, default=0)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

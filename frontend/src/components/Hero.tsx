@@ -6,7 +6,8 @@ import { fetchHero } from '../lib/api'
 
 export default function Hero() {
   const [data, setData] = useState<any>(null)
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isAr = i18n.language === 'ar'
 
   useEffect(() => {
     fetchHero().then(r => setData(r.data)).catch(() => {})
@@ -16,7 +17,7 @@ export default function Hero() {
   const line1    = data?.headline_line1    || 'Your Global Partner in'
   const line2    = data?.headline_line2    || 'Scrap & Alloy Metals'
   const sub      = data?.subheadline       || 'RE METAL connects the global supply chain with premium ferrous, non-ferrous, and specialty alloy metals — backed by 16+ years of Gulf expertise.'
-  const cta2     = data?.cta_secondary_text|| t('hero.explore')
+  const cta2     = isAr ? t('hero.explore') : (data?.cta_secondary_text || t('hero.explore'))
   const bgImage  = data?.bg_image_url      || null
 
   return (

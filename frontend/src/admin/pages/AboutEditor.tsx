@@ -65,7 +65,7 @@ export default function AboutEditor() {
         <div className="bg-[#0d1424] border border-white/5 rounded-2xl p-6 space-y-4">
           <h2 className="text-sm font-bold text-white">Text Content</h2>
           {[
-            ['Section Label', 'section_label'], ['Headline', 'headline'],
+            ['Section Label', 'section_label'], ['Headline (English)', 'headline'],
           ].map(([label, name]) => (
             <div key={name}>
               <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">{label}</label>
@@ -73,8 +73,14 @@ export default function AboutEditor() {
                 className="w-full bg-[#1a2235] border border-white/10 focus:border-amber-500 rounded-xl px-4 py-3 text-white outline-none transition-colors text-sm" />
             </div>
           ))}
+          <div>
+            <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">العنوان بالعربي</label>
+            <input value={form['headline_ar'] || ''} onChange={set('headline_ar')}
+              className="w-full bg-[#1a2235] border border-white/10 focus:border-amber-500 rounded-xl px-4 py-3 text-white outline-none transition-colors text-sm text-right"
+              dir="rtl" placeholder="مبني على 40 عاماً من الخبرة الخليجية" />
+          </div>
           {[
-            ['Body Paragraph 1', 'body_paragraph1'], ['Body Paragraph 2', 'body_paragraph2'], ['Quote Text', 'quote_text']
+            ['Body Paragraph 1 (English)', 'body_paragraph1'], ['Body Paragraph 2 (English)', 'body_paragraph2'], ['Quote Text (English)', 'quote_text']
           ].map(([label, name]) => (
             <div key={name}>
               <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">{label}</label>
@@ -82,6 +88,24 @@ export default function AboutEditor() {
                 className="w-full bg-[#1a2235] border border-white/10 focus:border-amber-500 rounded-xl px-4 py-3 text-white outline-none transition-colors text-sm resize-none" />
             </div>
           ))}
+          <div>
+            <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">الفقرة الأولى بالعربي</label>
+            <textarea rows={3} value={form['body_paragraph1_ar'] || ''} onChange={set('body_paragraph1_ar')}
+              className="w-full bg-[#1a2235] border border-white/10 focus:border-amber-500 rounded-xl px-4 py-3 text-white outline-none transition-colors text-sm resize-none text-right"
+              dir="rtl" />
+          </div>
+          <div>
+            <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">الفقرة الثانية بالعربي</label>
+            <textarea rows={3} value={form['body_paragraph2_ar'] || ''} onChange={set('body_paragraph2_ar')}
+              className="w-full bg-[#1a2235] border border-white/10 focus:border-amber-500 rounded-xl px-4 py-3 text-white outline-none transition-colors text-sm resize-none text-right"
+              dir="rtl" />
+          </div>
+          <div>
+            <label className="block text-xs text-gray-400 mb-2 uppercase tracking-wider">الاقتباس بالعربي</label>
+            <textarea rows={3} value={form['quote_text_ar'] || ''} onChange={set('quote_text_ar')}
+              className="w-full bg-[#1a2235] border border-white/10 focus:border-amber-500 rounded-xl px-4 py-3 text-white outline-none transition-colors text-sm resize-none text-right"
+              dir="rtl" />
+          </div>
         </div>
 
         {/* Info Cards */}
