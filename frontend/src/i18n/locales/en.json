@@ -1,0 +1,144 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "materials": "Materials",
+    "blog": "Blog",
+    "contact": "Contact",
+    "whatsapp": "WhatsApp Now"
+  },
+  "hero": {
+    "years": "16+ Years Experience",
+    "countries": "10+ Countries Served",
+    "logistics": "End-to-End Logistics",
+    "whatsapp": "WhatsApp Now",
+    "explore": "Explore Materials"
+  },
+  "about": {
+    "sectionLabel": "About Us",
+    "founded": "Founded",
+    "headquarters": "Headquarters",
+    "operations": "Operations",
+    "specialty": "Specialty"
+  },
+  "stats": {
+    "tonnageLabel": "Annual Tonnage Traded",
+    "countriesLabel": "Countries Served",
+    "yearsLabel": "Years in Industry",
+    "partnersLabel": "Global Partners"
+  },
+  "materials": {
+    "sectionLabel": "What We Trade",
+    "heading": "Materials",
+    "headingGradient": "Portfolio",
+    "subheading": "From industrial yards to global markets — high-grade metals handled with precision and traded at scale.",
+    "requestQuote": "Request Quote →",
+    "categories": {
+      "Non-Ferrous": "Non-Ferrous",
+      "Ferrous": "Ferrous",
+      "Specialty": "Specialty",
+      "Mixed": "Mixed"
+    }
+  },
+  "materialDetail": {
+    "backToMaterials": "Back to Materials",
+    "requestQuote": "Request a Quote",
+    "chatWhatsapp": "Chat on WhatsApp",
+    "whatsappUs": "WhatsApp Us",
+    "aboutMaterial": "About This Material",
+    "keyApplications": "Key Applications",
+    "originSourcing": "Origin & Sourcing",
+    "technicalSpecs": "Technical Specifications",
+    "otherMaterials": "Other Materials We Trade",
+    "minOrder": "Minimum Order",
+    "packaging": "Packaging",
+    "property": "Property",
+    "value": "Value",
+    "notFound": "Material Not Found",
+    "notFoundDesc": "This material doesn't exist or has been removed."
+  },
+  "testimonials": {
+    "sectionLabel": "Client Testimonials",
+    "heading": "Trusted by",
+    "headingGradient": "Industry Leaders",
+    "subheading": "Hear directly from our partners across the global supply chain."
+  },
+  "faq": {
+    "heading": "Frequently Asked Questions",
+    "subheading": "Everything you need to know about our metal trading services"
+  },
+  "contact": {
+    "sectionLabel": "Get In Touch",
+    "heading": "Contact Our",
+    "headingGradient": "Team",
+    "subheading": "Request a quote or discuss your specific material requirements with our experts.",
+    "letsTalk": "Let's Talk Business",
+    "letsTalkDesc": "Whether you're sourcing premium metals or looking to sell scrap, our team is ready to structure the right deal for your needs.",
+    "phoneWhatsapp": "Phone / WhatsApp",
+    "email": "Email",
+    "address": "Address",
+    "yourName": "Your Name *",
+    "emailAddress": "Email Address *",
+    "subject": "Subject *",
+    "message": "Message",
+    "namePlaceholder": "John Smith",
+    "emailPlaceholder": "john@company.com",
+    "subjectPlaceholder": "Quote Request — Copper Scrap",
+    "messagePlaceholder": "Describe your material requirements, quantities, and destination...",
+    "sendInquiry": "Send Inquiry",
+    "sending": "Sending...",
+    "chatWhatsapp": "Chat on WhatsApp",
+    "successMsg": "✅ Message sent! We'll get back to you within 24 hours.",
+    "errorMsg": "❌ Something went wrong. Please email us directly at"
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "location": "Location",
+    "home": "Home",
+    "about": "About Us",
+    "materials": "Materials",
+    "contact": "Contact"
+  },
+  "offline": {
+    "msg": "You are offline — showing cached content"
+  },
+  "blog": {
+    "badge": "Latest Articles",
+    "heading": "Our",
+    "headingGradient": "Blog",
+    "subheading": "Industry news, market updates, and insights from our global metal trading team.",
+    "comingSoon": "Coming Soon",
+    "comingSoonDesc": "We're working on our first articles. Check back soon!",
+    "backToBlog": "Back to Blog",
+    "moreArticles": "More Articles",
+    "postNotFound": "Post Not Found",
+    "postNotFoundDesc": "The article you're looking for doesn't exist or has been removed."
+  },
+  "pages": {
+    "about": {
+      "title": "About MAHD Metals",
+      "subtitle": "A partnership built on 40 years of Gulf expertise and global trust."
+    },
+    "materials": {
+      "title": "Our Materials",
+      "subtitle": "Premium ferrous, non-ferrous, and specialty alloy metals — sourced and traded globally."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "subtitle": "Request a quote or get in touch with our global trading team."
+    }
+  },
+  "chatbot": {
+    "header": "Saddam Scrap & Metal",
+    "subheader": "Ask us anything",
+    "greeting": "Hi! How can we help you today?",
+    "placeholder": "Type your message...",
+    "chatWhatsapp": "Chat on WhatsApp",
+    "chips": {
+      "metals": "What metals do you trade?",
+      "quote": "How to get a quote?",
+      "contact": "Contact information"
+    },
+    "defaultResponse": "I'm not sure I understood that. I can help with information about our metals, pricing, shipping, contact details, or how to get a quote. Try asking: What metals do you trade? How do I get a quote? How can I contact you?"
+  }
+}

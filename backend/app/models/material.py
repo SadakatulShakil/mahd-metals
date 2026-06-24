@@ -21,3 +21,6 @@ class Material(Base):
     packaging = Column(String(200), nullable=True)
     meta_title = Column(String(300), nullable=True)
     meta_description = Column(String(500), nullable=True)
+    name_ar = Column(String(200), nullable=True)
+    description_ar = Column(Text, nullable=True)
+    full_description_ar = Column(Text, nullable=True)

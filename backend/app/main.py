@@ -23,6 +23,9 @@ with engine.connect() as conn:
         "ALTER TABLE materials ADD COLUMN IF NOT EXISTS packaging VARCHAR(200)",
         "ALTER TABLE materials ADD COLUMN IF NOT EXISTS meta_title VARCHAR(300)",
         "ALTER TABLE materials ADD COLUMN IF NOT EXISTS meta_description VARCHAR(500)",
+        "ALTER TABLE materials ADD COLUMN IF NOT EXISTS name_ar VARCHAR(200)",
+        "ALTER TABLE materials ADD COLUMN IF NOT EXISTS description_ar TEXT",
+        "ALTER TABLE materials ADD COLUMN IF NOT EXISTS full_description_ar TEXT",
     ]:
         try:
             conn.execute(__import__('sqlalchemy').text(col))

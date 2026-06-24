@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { fetchAbout, fetchAboutBullets } from '../lib/api'
 import { CheckCircle2 } from 'lucide-react'
 
@@ -14,6 +15,7 @@ const DEFAULT_BULLETS = [
 export default function About() {
   const [data, setData]       = useState<any>(null)
   const [bullets, setBullets] = useState<any[]>([])
+  const { t } = useTranslation()
 
   useEffect(() => {
     fetchAbout().then(r => setData(r.data)).catch(() => {})
@@ -27,7 +29,7 @@ export default function About() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <div className="section-label mb-3">{data?.section_label || 'About Us'}</div>
+            <div className="section-label mb-3">{data?.section_label || t('about.sectionLabel')}</div>
             <h2 className="text-4xl md:text-5xl font-black leading-tight mb-6">
               <span className="text-gradient">{data?.headline || 'Built on 40 Years of Gulf Expertise'}</span>
             </h2>
@@ -57,10 +59,10 @@ export default function About() {
               <div className="p-8">
                 <div className="grid grid-cols-2 gap-3 mb-6">
                   {[
-                    ['Founded',      data?.founded_year  || 'Est. 1984'],
-                    ['Headquarters', data?.headquarters  || 'Jeddah, KSA'],
-                    ['Operations',   data?.operations    || 'Gulf & Global'],
-                    ['Specialty',    data?.specialty     || 'Alloys & Scrap'],
+                    [t('about.founded'),      data?.founded_year  || 'Est. 1984'],
+                    [t('about.headquarters'), data?.headquarters  || 'Jeddah, KSA'],
+                    [t('about.operations'),   data?.operations    || 'Gulf & Global'],
+                    [t('about.specialty'),    data?.specialty     || 'Alloys & Scrap'],
                   ].map(([label, value]) => (
                     <div key={label} className="bg-white/[0.03] border border-white/5 rounded-xl p-4">
                       <div className="text-amber-400 text-[10px] uppercase tracking-widest mb-1">{label}</div>

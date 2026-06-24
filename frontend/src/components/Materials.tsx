@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { fetchMaterials } from '../lib/api'
 
 const categoryStyle: Record<string, string> = {
@@ -19,6 +20,8 @@ const hoverBorder: Record<string, string> = {
 
 export default function Materials() {
   const [materials, setMaterials] = useState<any[]>([])
+  const { t, i18n } = useTranslation()
+  const isAr = i18n.language === 'ar'
 
   useEffect(() => {
     fetchMaterials().then(r => setMaterials(r.data)).catch(() => {})
@@ -29,39 +32,44 @@ export default function Materials() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
-            <div className="section-label mb-3">What We Trade</div>
+            <div className="section-label mb-3">{t('materials.sectionLabel')}</div>
             <h2 className="text-4xl md:text-5xl font-black leading-tight">
-              Materials<br /><span className="text-gradient">Portfolio</span>
+              {t('materials.heading')}<br /><span className="text-gradient">{t('materials.headingGradient')}</span>
             </h2>
           </div>
           <p className="text-gray-500 max-w-sm text-sm leading-relaxed">
-            From industrial yards to global markets — high-grade metals handled with precision and traded at scale.
+            {t('materials.subheading')}
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {materials.map(m => (
-            <Link key={m.slug} to={`/materials/${m.slug}`}
-              className={`group relative bg-[#0d1424] border border-white/5 ${hoverBorder[m.category] || 'group-hover:border-amber-500/40'} rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/40 hover:bg-[#111827]`}>
-              {/* Material image */}
-              {m.image_url && (
-                <div className="w-full h-36 mb-4 rounded-xl overflow-hidden border border-white/5">
-                  <img src={m.image_url} alt={m.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          {materials.map(m => {
+            const displayName = isAr && m.name_ar ? m.name_ar : m.name
+            const displayDesc = isAr && m.description_ar ? m.description_ar : m.description
+            const categoryLabel = t(`materials.categories.${m.category}`, { defaultValue: m.category })
+
+            return (
+              <Link key={m.slug} to={`/materials/${m.slug}`}
+                className={`group relative bg-[#0d1424] border border-white/5 ${hoverBorder[m.category] || 'group-hover:border-amber-500/40'} rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/40 hover:bg-[#111827]`}>
+                {m.image_url && (
+                  <div className="w-full h-36 mb-4 rounded-xl overflow-hidden border border-white/5">
+                    <img src={m.image_url} alt={displayName} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                )}
+                <div className="flex items-start justify-between mb-5">
+                  <span className={`text-[11px] font-semibold px-3 py-1 rounded-full border ${categoryStyle[m.category] || 'bg-amber-500/10 text-amber-400 border-amber-500/20'}`}>
+                    {categoryLabel}
+                  </span>
+                  <ArrowUpRight size={16} className="text-gray-700 group-hover:text-amber-400 transition-colors" />
                 </div>
-              )}
-              <div className="flex items-start justify-between mb-5">
-                <span className={`text-[11px] font-semibold px-3 py-1 rounded-full border ${categoryStyle[m.category] || 'bg-amber-500/10 text-amber-400 border-amber-500/20'}`}>
-                  {m.category}
-                </span>
-                <ArrowUpRight size={16} className="text-gray-700 group-hover:text-amber-400 transition-colors" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2">{m.name}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{m.description}</p>
-              <div className="mt-5 pt-4 border-t border-white/5">
-                <span className="text-amber-400 text-xs font-semibold group-hover:underline">Request Quote →</span>
-              </div>
-            </Link>
-          ))}
+                <h3 className="text-lg font-bold text-white mb-2">{displayName}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{displayDesc}</p>
+                <div className="mt-5 pt-4 border-t border-white/5">
+                  <span className="text-amber-400 text-xs font-semibold group-hover:underline">{t('materials.requestQuote')}</span>
+                </div>
+              </Link>
+            )
+          })}
         </div>
 
       </div>

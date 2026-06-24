@@ -17,6 +17,9 @@ class MaterialBase(BaseModel):
     packaging: Optional[str] = None
     meta_title: Optional[str] = None
     meta_description: Optional[str] = None
+    name_ar: Optional[str] = None
+    description_ar: Optional[str] = None
+    full_description_ar: Optional[str] = None
 
 class MaterialResponse(MaterialBase):
     id: int

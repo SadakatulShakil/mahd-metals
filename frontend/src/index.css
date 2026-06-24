@@ -16,6 +16,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+html[lang="ar"] body {
+  font-family: 'Tajawal', system-ui, sans-serif;
+}
+
 .text-gradient {
   background: linear-gradient(90deg, #fbbf24, #d97706);
   -webkit-background-clip: text;

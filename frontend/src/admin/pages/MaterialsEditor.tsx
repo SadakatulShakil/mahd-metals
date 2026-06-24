@@ -6,9 +6,9 @@ import { Plus, Pencil, Trash2, Upload, X, Save, ExternalLink } from 'lucide-reac
 const CATEGORIES = ['Ferrous', 'Non-Ferrous', 'Specialty', 'Mixed']
 
 const empty = () => ({
-  slug: '', name: '', category: 'Non-Ferrous', description: '',
+  slug: '', name: '', name_ar: '', category: 'Non-Ferrous', description: '', description_ar: '',
   seo_title: '', seo_description: '', image_url: '', is_active: true,
-  full_description: '', specifications: '', applications: '',
+  full_description: '', full_description_ar: '', specifications: '', applications: '',
   origin_countries: '', min_order: '', packaging: '',
   meta_title: '', meta_description: '',
 })
@@ -151,9 +151,15 @@ export default function MaterialsEditor() {
               {/* Basic info */}
               <div className="space-y-4">
                 <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Basic Info</p>
-                <div>
-                  <label className={labelCls}>Name *</label>
-                  <input value={editing.name || ''} onChange={e => handleNameChange(e.target.value)} className={inputCls} placeholder="e.g. Copper Wire" />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className={labelCls}>Name (English) *</label>
+                    <input value={editing.name || ''} onChange={e => handleNameChange(e.target.value)} className={inputCls} placeholder="e.g. Copper Wire" />
+                  </div>
+                  <div>
+                    <label className={labelCls}>الاسم بالعربي</label>
+                    <input value={editing.name_ar || ''} onChange={set('name_ar')} className={`${inputCls} text-right`} placeholder="مثال: أسلاك نحاسية" dir="rtl" />
+                  </div>
                 </div>
                 <div>
                   <label className={labelCls}>Slug</label>
@@ -172,8 +178,12 @@ export default function MaterialsEditor() {
                   </select>
                 </div>
                 <div>
-                  <label className={labelCls}>Short Description</label>
+                  <label className={labelCls}>Short Description (English)</label>
                   <textarea rows={3} value={editing.description || ''} onChange={set('description')} className={`${inputCls} resize-none`} placeholder="Brief description shown on cards" />
+                </div>
+                <div>
+                  <label className={labelCls}>الوصف المختصر بالعربي</label>
+                  <textarea rows={3} value={editing.description_ar || ''} onChange={set('description_ar')} className={`${inputCls} resize-none text-right`} placeholder="وصف مختصر يظهر على البطاقات" dir="rtl" />
                 </div>
               </div>
 
@@ -181,9 +191,14 @@ export default function MaterialsEditor() {
               <div className="space-y-4 border-t border-white/5 pt-5">
                 <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Rich Content</p>
                 <div>
-                  <label className={labelCls}>Full Description</label>
+                  <label className={labelCls}>Full Description (English)</label>
                   <textarea rows={6} value={editing.full_description || ''} onChange={set('full_description')} className={`${inputCls} resize-none`}
                     placeholder="Detailed description shown on the material detail page" />
+                </div>
+                <div>
+                  <label className={labelCls}>الوصف الكامل بالعربي</label>
+                  <textarea rows={6} value={editing.full_description_ar || ''} onChange={set('full_description_ar')} className={`${inputCls} resize-none text-right`}
+                    placeholder="وصف تفصيلي يظهر في صفحة تفاصيل المادة" dir="rtl" />
                 </div>
               </div>
 

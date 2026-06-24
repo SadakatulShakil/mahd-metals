@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { fetchStats } from '../lib/api'
 
 function StatCard({ value, label, sub, border }: any) {
@@ -7,7 +8,7 @@ function StatCard({ value, label, sub, border }: any) {
   const suffix = match?.[2] || ''
 
   return (
-    <div className={`bg-[#0d1424] text-center py-10 px-6 hover:bg-[#111827] transition-colors duration-300 ${border ? 'border-r border-white/[0.04]' : ''}`}>
+    <div className={`bg-[#0d1424] text-center py-10 px-6 hover:bg-[#111827] transition-colors duration-300 ${border ? 'border-e border-white/[0.04]' : ''}`}>
       <div className="text-4xl md:text-5xl font-black mb-2">
         <span className="text-white">{num}</span>
         <span className="text-amber-400">{suffix}</span>
@@ -20,14 +21,15 @@ function StatCard({ value, label, sub, border }: any) {
 
 export default function Stats() {
   const [data, setData] = useState<any>(null)
+  const { t } = useTranslation()
 
   useEffect(() => { fetchStats().then(r => setData(r.data)).catch(() => {}) }, [])
 
   const stats = [
-    { value: data?.annual_tonnage    || '1.2M+', label: 'Annual Tonnage Traded', sub: data?.annual_tonnage_sub    || 'metric tons' },
-    { value: data?.countries_served  || '10+',   label: 'Countries Served',      sub: data?.countries_served_sub  || 'worldwide' },
-    { value: data?.years_in_industry || '10+',   label: 'Years in Industry',     sub: data?.years_in_industry_sub || 'of expertise' },
-    { value: data?.global_partners   || '15+',  label: 'Global Partners',       sub: data?.global_partners_sub   || 'and growing' },
+    { value: data?.annual_tonnage    || '1.2M+', label: t('stats.tonnageLabel'), sub: data?.annual_tonnage_sub    || 'metric tons' },
+    { value: data?.countries_served  || '10+',   label: t('stats.countriesLabel'), sub: data?.countries_served_sub  || 'worldwide' },
+    { value: data?.years_in_industry || '10+',   label: t('stats.yearsLabel'), sub: data?.years_in_industry_sub || 'of expertise' },
+    { value: data?.global_partners   || '15+',   label: t('stats.partnersLabel'), sub: data?.global_partners_sub   || 'and growing' },
   ]
 
   return (

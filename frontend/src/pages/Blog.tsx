@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { api } from '../lib/api'
 import SEO from '../components/SEO'
 
@@ -14,13 +15,14 @@ interface Post {
   created_at: string
 }
 
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+function formatDate(iso: string, lang: string) {
+  return new Date(iso).toLocaleDateString(lang === 'ar' ? 'ar-SA' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
+  const { t, i18n } = useTranslation()
 
   useEffect(() => {
     api.get('/api/blog').then(r => setPosts(r.data)).catch(() => {}).finally(() => setLoading(false))
@@ -35,18 +37,15 @@ export default function BlogPage() {
       />
       <main className="min-h-screen bg-[#020617] pt-24 pb-20">
         <div className="max-w-6xl mx-auto px-6">
-          {/* Header */}
           <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-4 py-1.5 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-              <span className="text-amber-400 text-xs font-semibold tracking-wide">Latest Articles</span>
+              <span className="text-amber-400 text-xs font-semibold tracking-wide">{t('blog.badge')}</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
-              Our <span className="text-gradient">Blog</span>
+              {t('blog.heading')} {t('blog.headingGradient') && <span className="text-gradient">{t('blog.headingGradient')}</span>}
             </h1>
-            <p className="text-gray-400 text-lg max-w-xl mx-auto">
-              Industry news, market updates, and insights from our global metal trading team.
-            </p>
+            <p className="text-gray-400 text-lg max-w-xl mx-auto">{t('blog.subheading')}</p>
           </div>
 
           {loading && (
@@ -67,26 +66,20 @@ export default function BlogPage() {
           {!loading && posts.length === 0 && (
             <div className="text-center py-24">
               <div className="text-6xl mb-6">📰</div>
-              <h2 className="text-2xl font-bold text-white mb-3">Coming Soon</h2>
-              <p className="text-gray-400">We're working on our first articles. Check back soon!</p>
+              <h2 className="text-2xl font-bold text-white mb-3">{t('blog.comingSoon')}</h2>
+              <p className="text-gray-400">{t('blog.comingSoonDesc')}</p>
             </div>
           )}
 
           {!loading && posts.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {posts.map(post => (
-                <Link
-                  key={post.id}
-                  to={`/blog/${post.slug}`}
-                  className="group bg-[#0d1424] border border-white/5 rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-black/40 hover:border-amber-500/20 transition-all duration-300"
-                >
+                <Link key={post.id} to={`/blog/${post.slug}`}
+                  className="group bg-[#0d1424] border border-white/5 rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-black/40 hover:border-amber-500/20 transition-all duration-300">
                   {post.cover_image_url ? (
                     <div className="overflow-hidden h-48">
-                      <img
-                        src={post.cover_image_url}
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+                      <img src={post.cover_image_url} alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                   ) : (
                     <div className="h-48 bg-gradient-to-br from-amber-500/10 to-amber-900/10 flex items-center justify-center">
@@ -107,7 +100,7 @@ export default function BlogPage() {
                     )}
                     <div className="flex items-center justify-between text-xs text-gray-500 pt-3 border-t border-white/5">
                       <span>{post.author}</span>
-                      <span>{formatDate(post.created_at)}</span>
+                      <span>{formatDate(post.created_at, i18n.language)}</span>
                     </div>
                   </div>
                 </Link>

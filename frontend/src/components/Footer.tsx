@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Phone, Mail, MapPin, Code2 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { fetchContactInfo, fetchBranding } from '../lib/api'
 import Logo from './Logo'
 
@@ -29,6 +30,7 @@ const IconLinkedin = () => (
 export default function Footer() {
   const [info, setInfo]         = useState<any>(null)
   const [branding, setBranding] = useState<any>(null)
+  const { t } = useTranslation()
 
   useEffect(() => {
     fetchContactInfo().then(r => setInfo(r.data)).catch(() => {})
@@ -68,9 +70,14 @@ export default function Footer() {
           </div>
 
           <div>
-            <div className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Navigation</div>
+            <div className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">{t('footer.navigation')}</div>
             <div className="space-y-2.5">
-              {[['/', 'Home'], ['/about', 'About Us'], ['/materials', 'Materials'], ['/contact', 'Contact']].map(([to, label]) => (
+              {([
+                ['/', t('footer.home')],
+                ['/about', t('footer.about')],
+                ['/materials', t('footer.materials')],
+                ['/contact', t('footer.contact')],
+              ] as [string, string][]).map(([to, label]) => (
                 <Link key={to} to={to}
                   className="block text-gray-500 hover:text-amber-400 text-sm transition-colors">{label}</Link>
               ))}
@@ -78,7 +85,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <div className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Location</div>
+            <div className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">{t('footer.location')}</div>
             <div className="flex items-start gap-2 text-gray-500 text-sm leading-relaxed">
               <MapPin size={13} className="text-amber-400 mt-0.5 shrink-0" />
               <span>
@@ -91,12 +98,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-gray-600 text-xs">{copyright}</div>
           <div className="text-gray-600 text-xs">{locations}</div>
 
-          {/* Social icons — always visible, URLs from admin panel */}
           <div className="flex items-center gap-4">
             <a href={fbUrl} target="_blank" rel="noopener noreferrer"
               className="text-gray-500 hover:text-amber-400 transition-colors" aria-label="Facebook">

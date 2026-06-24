@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { api } from '../lib/api'
 import SEO from '../components/SEO'
 
@@ -18,12 +19,15 @@ interface Post {
   meta_description: string | null
 }
 
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+function formatDate(iso: string, lang = 'en') {
+  return new Date(iso).toLocaleDateString(lang === 'ar' ? 'ar-SA' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>()
+  const { t, i18n } = useTranslation()
+  const isAr = i18n.language === 'ar'
+  const BackIcon = isAr ? ArrowRight : ArrowLeft
   const [post, setPost] = useState<Post | null>(null)
   const [related, setRelated] = useState<Post[]>([])
   const [notFound, setNotFound] = useState(false)
@@ -68,10 +72,10 @@ export default function BlogPostPage() {
       <main className="min-h-screen bg-[#020617] pt-24 pb-20 flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-6">404</div>
-          <h1 className="text-2xl font-bold text-white mb-3">Post Not Found</h1>
-          <p className="text-gray-400 mb-8">The article you're looking for doesn't exist or has been removed.</p>
+          <h1 className="text-2xl font-bold text-white mb-3">{t('blog.postNotFound')}</h1>
+          <p className="text-gray-400 mb-8">{t('blog.postNotFoundDesc')}</p>
           <Link to="/blog" className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 font-medium transition-colors">
-            <ArrowLeft size={16} /> Back to Blog
+            <BackIcon size={16} /> {t('blog.backToBlog')}
           </Link>
         </div>
       </main>
@@ -99,7 +103,7 @@ export default function BlogPostPage() {
         <div className="max-w-3xl mx-auto px-6 pt-8">
           {/* Back link */}
           <Link to="/blog" className="inline-flex items-center gap-2 text-gray-400 hover:text-amber-400 text-sm font-medium transition-colors mb-8">
-            <ArrowLeft size={15} /> Back to Blog
+            <BackIcon size={15} /> {t('blog.backToBlog')}
           </Link>
 
           {/* Meta */}
@@ -114,7 +118,7 @@ export default function BlogPostPage() {
           <div className="flex items-center gap-4 text-sm text-gray-400 mb-8 pb-8 border-b border-white/5">
             <span className="font-medium text-gray-300">{post.author}</span>
             <span>·</span>
-            <span>{formatDate(post.created_at)}</span>
+            <span>{formatDate(post.created_at, i18n.language)}</span>
           </div>
 
           {/* Content */}
@@ -138,7 +142,7 @@ export default function BlogPostPage() {
         {related.length > 0 && (
           <div className="max-w-6xl mx-auto px-6 mt-20">
             <div className="border-t border-white/5 pt-14">
-              <h2 className="text-2xl font-bold text-white mb-8">More Articles</h2>
+              <h2 className="text-2xl font-bold text-white mb-8">{t('blog.moreArticles')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {related.map(p => (
                   <Link
